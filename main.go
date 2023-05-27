@@ -1,14 +1,13 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"errors"
+
+	"github.com/KantaHasegawa/OAuth2.0_client_server/router"
 )
 func main() {
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context){
-		c.JSON(200, gin.H{
-			"message": "I am root end point",
-		})
-	})
-	r.Run()
+	r := router.NewRouter()
+	if err := r.Run(":8081"); err != nil{
+		panic(errors.New("can not start server"))
+	}
 }
